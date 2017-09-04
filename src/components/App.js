@@ -73,19 +73,34 @@ class App extends React.Component {
         }
 
         if(valid && sumGet !== 0){
-            const of100 = countOfNotes(sumGet, this.props.atm.default_100);
+            const of100 = countOfNotes(this.props.atm.default_100);
             this.props.setOf100(of100);
-            sumGet -= of100 * this.props.atm.default_100;
 
-            const of50 = countOfNotes(sumGet, this.props.atm.default_50);
+            const of50 = countOfNotes(this.props.atm.default_50);
             this.props.setOf50(of50);
-            sumGet -= of50 * this.props.atm.default_50;
 
-            const of20 = countOfNotes(sumGet, this.props.atm.default_20);
+            const of20 = countOfNotes(this.props.atm.default_20);
             this.props.setOf20(of20);
 
-            function countOfNotes(sum, currency) {
-                let countOf = Math.floor(sum / currency);
+            function countOfNotes(currency) {
+                let countOf;
+                if(sumGet % 20 === 0) {
+                    countOf = Math.floor(sumGet / currency);
+                    let remainder = sumGet % currency;
+                    if(remainder % 20 !== 0 && remainder < currency) {
+                        countOf -= 1;
+                        sumGet = remainder + currency;
+                    }
+                    sumGet -= countOf * currency;
+                }else{
+                    countOf = Math.floor(sumGet / currency);
+                    let remainder = sumGet % currency;
+                    if(remainder % 20 !== 0) {
+                        countOf -= 1;
+                        remainder += currency;
+                    }
+                    sumGet = remainder;
+                }
                 return countOf;
             }
 
