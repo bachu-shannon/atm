@@ -1,0 +1,11 @@
+.atm {
+    width: 300px;
+    margin: 30px auto 0;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+}
+.row {
+    margin: 0;
+}
