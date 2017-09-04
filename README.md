@@ -1,6 +1,6 @@
 # atm
 node v6.11.2
-#Install
+# Install
 npm install
-#Run
+# Run
 npm run start
