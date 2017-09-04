@@ -84,22 +84,26 @@ class App extends React.Component {
 
             function countOfNotes(currency) {
                 let countOf;
-                if(sumGet % 20 === 0) {
-                    countOf = Math.floor(sumGet / currency);
-                    let remainder = sumGet % currency;
-                    if(remainder % 20 !== 0 && remainder < currency) {
-                        countOf -= 1;
-                        sumGet = remainder + currency;
+                if(sumGet > currency) {
+                    if(sumGet % 20 === 0) {
+                        countOf = Math.floor(sumGet / currency);
+                        let remainder = sumGet % currency;
+                        if(remainder % 20 !== 0 && remainder < currency) {
+                            countOf -= 1;
+                            sumGet = remainder + currency;
+                        }
+                        sumGet -= countOf * currency;
+                    }else{
+                        countOf = Math.floor(sumGet / currency);
+                        let remainder = sumGet % currency;
+                        if(remainder % 20 !== 0) {
+                            countOf -= 1;
+                            remainder += currency;
+                        }
+                        sumGet = remainder;
                     }
-                    sumGet -= countOf * currency;
                 }else{
                     countOf = Math.floor(sumGet / currency);
-                    let remainder = sumGet % currency;
-                    if(remainder % 20 !== 0) {
-                        countOf -= 1;
-                        remainder += currency;
-                    }
-                    sumGet = remainder;
                 }
                 return countOf;
             }
