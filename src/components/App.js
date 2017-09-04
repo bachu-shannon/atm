@@ -65,7 +65,7 @@ class App extends React.Component {
         let sumGet = Number(this.clientSumValue.value);
         let newBalance= this.props.atm.balance - sumGet;
 
-        if (this.props.atm.balance < Number(this.clientSumValue.value) || !(Number(this.clientSumValue.value) % 10 === 0) || (Number(this.clientSumValue.value) < this.props.atm.default_20)) {
+        if (this.props.atm.balance < sumGet || !(sumGet % 10 === 0) || this.props.atm.default_20 > sumGet) {
             this.props.showModalError(true);
             this.props.showModalSuccess(false);
             valid = false;
@@ -84,7 +84,7 @@ class App extends React.Component {
 
             function countOfNotes(currency) {
                 let countOf;
-                if(sumGet > currency) {
+                if(sumGet >= currency) {
                     if(sumGet % 20 === 0) {
                         countOf = Math.floor(sumGet / currency);
                         let remainder = sumGet % currency;
