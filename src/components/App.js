@@ -65,7 +65,7 @@ class App extends React.Component {
         let sumGet = Number(this.clientSumValue.value);
         let newBalance= this.props.atm.balance - sumGet;
 
-        if (this.props.atm.balance < Number(this.clientSumValue.value)) {
+        if (this.props.atm.balance < Number(this.clientSumValue.value) || !(Number(this.clientSumValue.value) % 10 === 0) || (Number(this.clientSumValue.value) < this.props.atm.default_20)) {
             this.props.showModalError(true);
             this.props.showModalSuccess(false);
             valid = false;
