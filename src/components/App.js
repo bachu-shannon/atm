@@ -102,8 +102,6 @@ class App extends React.Component {
                         }
                         sumGet = remainder;
                     }
-                }else{
-                    countOf = Math.floor(sumGet / currency);
                 }
                 return countOf;
             }
